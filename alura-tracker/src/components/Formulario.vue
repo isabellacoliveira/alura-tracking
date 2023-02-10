@@ -24,6 +24,7 @@
     export default defineComponent({
         // eslint-disable-next-line vue/multi-word-component-names
         name: 'Formulario',
+        emtits: ['aoSalvarTarefa'],
         components: {
             // eslint-disable-next-line vue/no-unused-components
             Temporizador
@@ -36,10 +37,19 @@
         },
         methods: {
             finalizarTarefa(tempoDecorrido: number): void {
-                console.log('tempo decorrido', tempoDecorrido)
-                console.log('tarefa', this.descricao)
+                // nome do evento e o que estamos enviando 
+                this.$emit('aoSalvarTarefa', {
+                    duracaoEmSegundos: tempoDecorrido,
+                    descricao: this.descricao
+                })
                 this.descricao = ''
             }
         }
     })
 </script>
+<style>
+    .formulario{
+        color: var(--texto-primario);
+        background-color: var(--bg-primario);
+    }
+</style>
